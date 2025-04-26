@@ -23,6 +23,13 @@ const MapPage = () => {
     }
 
     const [open, setOpen] = useState(false);
+    const [destinationInput, setDestinationInput] = useState('');
+    const [destinationAddress, setDestinationAddress] = useState<string | null>(null);
+
+    function handleDestinationSubmit() {
+        if (!destinationInput) return;
+        setDestinationAddress(destinationInput);
+    }
 
     function Directions() {
         const map = useMap();
@@ -42,17 +49,17 @@ const MapPage = () => {
 
         useEffect(() => {
             if (!directionsService || !directionsRenderer) return;
-
+            if (!destinationAddress) return;
             directionsService.route({
-                origin: "100 Front St, Toronto ON",
-                destination: "500 College St, Toronto ON",
+                origin: position,
+                destination: destinationAddress,
                 travelMode: google.maps.TravelMode.DRIVING,
                 provideRouteAlternatives: true,
             }). then(response => {
                 directionsRenderer.setDirections(response);
                 setRoutes(response.routes);
             });
-        }, [directionsService, directionsRenderer])
+        }, [directionsService, directionsRenderer, destinationAddress])
 
         useEffect(() => {
             if (!directionsRenderer) return;
@@ -102,6 +109,18 @@ const MapPage = () => {
                         <p>Hi { userName || 'Traveler'}!</p>
                     </InfoWindow>}
                     <Directions />
+                    <div className="where-to-container">
+                        <input
+                            className="destination-container"
+                            type="text"
+                            placeholder="Where to?"
+                            value={destinationInput}
+                            onChange={(e) => setDestinationInput(e.target.value)}
+                        />
+                        <button className="destination-button" onClick={handleDestinationSubmit}>
+                            Go
+                        </button>
+                    </div>
                 </Map>
             </div>
         </APIProvider>
