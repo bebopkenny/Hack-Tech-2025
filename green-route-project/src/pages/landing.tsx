@@ -1,8 +1,11 @@
+// landing.tsx
 'use client';
 
 import { useAppContext } from '@/context/AppContext';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import DynamicSavingsChart from '@/components/DynamicSavingsChart';
+import SavingsChart from '@/components/SavingsChart';
 
 const LandingPage = () => {
   const { userName } = useAppContext();
@@ -18,24 +21,20 @@ const LandingPage = () => {
 
   return (
     <div className="landing-container">
-      <h1 className="landing-title">Welcome, {userName || 'Traveler'}! 🌿</h1>
+      <h1 className="landing-title">Welcome to GreenRoute 🌿</h1>
 
       <form onSubmit={handleDestinationSubmit} className="destination-form">
-        <label htmlFor="destination">Enter Your Destination:</label><br />
+        <label htmlFor="destination" className="destination-label">Enter Your Destination:</label>
         <input
           id="destination"
           type="text"
           placeholder="Where to?"
           value={destinationInput}
           onChange={(e) => setDestinationInput(e.target.value)}
-          className="destination-input"
           required
+          className="destination-input"
         />
-        <br />
-        <button 
-          type="submit" 
-          className="destination-button"
-        >
+        <button type="submit" className="destination-button">
           Start Planning 🌎
         </button>
       </form>
@@ -43,30 +42,22 @@ const LandingPage = () => {
       <div className="green-spots">
         <h2>🌍 Popular Green Spots:</h2>
         <ul>
-          <li onClick={() => setDestinationInput('Downtown Farmers Market')}>
-            🌱 Downtown Farmers Market
-          </li>
-          <li onClick={() => setDestinationInput('Tesla Supercharger Station')}>
-            🔌 Tesla Supercharger Station
-          </li>
-          <li onClick={() => setDestinationInput('EcoCycle Bike Repair')}>
-            🚲 EcoCycle Bike Repair
-          </li>
-          <li onClick={() => setDestinationInput('Whispering Pines Nature Park')}>
-            🌳 Whispering Pines Nature Park
-          </li>
+          <li>🌿 Downtown Farmers Market</li>
+          <li>🔌 Tesla Supercharger Station</li>
+          <li>🚲 EcoCycle Bike Repair</li>
+          <li>🌳 Whispering Pines Nature Park</li>
         </ul>
       </div>
 
       <div className="eco-tip">
         <h2>💡 Eco Tip:</h2>
-        <p>Biking just 1 mile saves 404g of CO₂ compared to driving! 🚲</p>
+        <p>Biking just 1 mile saves 404g of CO₂ compared to driving! 🚴‍♂️</p>
       </div>
 
-      <div className="coming-soon">
-        <h2>🚀 Coming Soon:</h2>
-        <p>Track your total Eco Impact with GreenRoute!</p>
+      <div className="chart-section">
+        <DynamicSavingsChart distanceMiles={5} carDurationMinutes={10} />
       </div>
+      <SavingsChart />
     </div>
   );
 };

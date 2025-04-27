@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow, useMap } from '@vis.gl/react-google-maps';
 import { useAppContext } from '@/context/AppContext';
+import SavingsChart from '@/components/SavingsChart';
+import DynamicSavingsChart from '@/components/DynamicSavingsChart';
+import EcoSavingsChart from '@/components/EcoSavingsChart';
+import CarEmissionsChart from '@/components/CarEmissionsChart';
+import EcoAlternativesChart from '@/components/EcoAlternativeChart'
 
 const GOOGLE_MAPS_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID!;
 
@@ -19,6 +24,14 @@ const MapPage = () => {
   const directionsRendererRef = useRef<google.maps.DirectionsRenderer | null>(null);
 
   const position = startLocation || { lat: 33.921, lng: -118.053 };
+
+  const panToLocation = (lat: number, lng: number) => {
+    if (map) {
+      map.panTo({ lat, lng });
+      map.setZoom(14);
+    }
+  };
+  
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.google?.maps?.DirectionsRenderer && map) {
@@ -83,71 +96,89 @@ const MapPage = () => {
   
 
   return (
-      <div className="map-container">
-        <div ref={placesDivRef} style={{display: 'none'}} />
-        <Map
-          zoom={14}
-          center={position}
-          mapId={GOOGLE_MAPS_ID}
-          fullscreenControl={true}
+    <div className="map-container">
+      <div ref={placesDivRef} style={{ display: 'none' }} />
+ 
+            <Map
+            zoom={14}
+            center={position}
+            mapId={GOOGLE_MAPS_ID}
+            fullscreenControl={true}
+            gestureHandling="greedy" 
+          >
+        <AdvancedMarker position={position} onClick={() => setOpen(true)}>
+          <Pin background="grey" borderColor="green" glyphColor="purple" />
+        </AdvancedMarker>
+  
+        {open && (
+          <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
+            <p>Hi {userName || 'Traveler'}!</p>
+          </InfoWindow>
+        )}
+      </Map>
+  
+      <div className="where-to-container">
+        <input
+          className="destination-container"
+          type="text"
+          placeholder="Where to?"
+          value={destinationInput}
+          onChange={(e) => setDestinationInput(e.target.value)}
+        />
+        <button
+          className="destination-button"
+          onClick={handleDestinationSubmit}
+          disabled={isLoading}
         >
-          <AdvancedMarker position={position} onClick={() => setOpen(true)}>
-            <Pin background="grey" borderColor="green" glyphColor="purple" />
-          </AdvancedMarker>
-
-          {open && (
-            <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
-              <p>Hi {userName || 'Traveler'}!</p>
-            </InfoWindow>
-          )}
-        </Map>
-
-        <div className="where-to-container">
-          <input
-            className="destination-container"
-            type="text"
-            placeholder="Where to?"
-            value={destinationInput}
-            onChange={(e) => setDestinationInput(e.target.value)}
-          />
-          <button className="destination-button" onClick={handleDestinationSubmit} disabled={isLoading}>
-            {isLoading ? 'Searching...' : 'Go'}
-          </button>
-
-          {destinationAddress && (
-            <div className="eco-middle-card">
-              <h2>Trip Summary 🌱</h2>
-              <p><strong>Pickup:</strong> {startLocation ? `(${startLocation.lat.toFixed(3)}, ${startLocation.lng.toFixed(3)})` : 'Detecting...'}</p>
-              <p><strong>Dropoff:</strong> {destinationAddress}</p>
-              <p><strong>Distance:</strong> {distance}</p>
-              <p><strong>Duration:</strong> {duration}</p>
-
-              <div className="eco-options">
-                <h4>Eco-Friendly Alternatives 🌎</h4>
-
-                <div className="eco-option-card">
-                  🚲 <strong>Bike</strong> (~{duration ? Math.round(Number(duration.replace(' mins', '')) * 2) : '?'} mins)
-                  <br />
-                  Save ~90% CO₂ emissions!
-                </div>
-
-                <div className="eco-option-card">
-                  🚶‍♂️ <strong>Walk</strong> (~{duration ? Math.round(Number(duration.replace(' mins', '')) * 4) : '?'} mins)
-                  <br />
-                  Save 100% CO₂ emissions!
-                </div>
-
-                <div className="eco-option-card">
-                  🚌 <strong>Public Transit</strong> (Coming Soon)
-                  <br />
-                  (Real transit data planned in production!)
-                </div>
+          {isLoading ? 'Searching...' : 'Go'}
+        </button>
+      </div>
+  
+      {destinationAddress && (
+        <div className="sidebar-panel">
+          {/* Trip Summary */}
+          <div className="eco-middle-card">
+            <h2>Trip Summary 🌱</h2>
+            <p><strong>Pickup:</strong> {startLocation?.lat && startLocation?.lng
+              ? `(${startLocation.lat.toFixed(3)}, ${startLocation.lng.toFixed(3)})`
+              : 'Unable to detect location.'}
+            </p>
+            <p><strong>Dropoff:</strong> {destinationAddress}</p>
+            <p><strong>Distance:</strong> {distance}</p>
+            <p><strong>Duration:</strong> {duration}</p>
+  
+            <div className="eco-options">
+              <h4>Eco-Friendly Alternatives 🌎</h4>
+  
+              <div className="eco-option-card">
+                🚲 <strong>Bike</strong> (~{duration ? Math.round(Number(duration.replace(' mins', '')) * 2) : '?'} mins)
+                <br />
+                Save ~90% CO₂ emissions!
+              </div>
+  
+              <div className="eco-option-card">
+                🚶‍♂️ <strong>Walk</strong> (~{duration ? Math.round(Number(duration.replace(' mins', '')) * 4) : '?'} mins)
+                <br />
+                Save 100% CO₂ emissions!
+              </div>
+  
+              <div className="eco-option-card">
+                🚌 <strong>Public Transit</strong> (Coming Soon)
+                <br />
+                (Real transit data planned in production!)
               </div>
             </div>
-          )}
+          </div>
+  
+          <div className="charts-container">
+            <CarEmissionsChart distanceMiles={Number(distance.replace(' mi', ''))} />
+            <EcoAlternativesChart distanceMiles={Number(distance.replace(' mi', ''))} />
+          </div>
         </div>
-      </div>
-  );
+      )}
+    </div>
+  );  
 }
+  
 
 export default MapPage;

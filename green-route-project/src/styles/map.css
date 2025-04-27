@@ -76,3 +76,56 @@
     box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
   }
   
+  .destination-button:hover {
+    background-color: #388e3c;
+  }
+  
+  .charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .chart-card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    flex: 1 1 300px;
+    max-width: 500px;
+  }
+  
+  .chart-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2e7d32;
+  }
+  
+  .sidebar-panel {
+    position: absolute;
+    top: 120px;
+    right: 20px;
+    width: 350px;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    z-index: 10;
+  }
+  
+
+  @media (max-width: 900px) {
+    .sidebar-panel {
+      position: static;
+      width: 100%;
+      margin-top: 2rem;
+      box-shadow: none;
+    }
+  }
+  
+  
