@@ -43,7 +43,7 @@ const LandingPage = () => {
         <h2>🌍 Popular Green Spots:</h2>
         <ul>
           <li>🌿 Downtown Farmers Market</li>
-          <li>🔌 Tesla Supercharger Station</li>
+          <li>🔌 Charing Station</li>
           <li>🚲 EcoCycle Bike Repair</li>
           <li>🌳 Whispering Pines Nature Park</li>
         </ul>

@@ -99,13 +99,19 @@ const MapPage = () => {
     <div className="map-container">
       <div ref={placesDivRef} style={{ display: 'none' }} />
  
-        <Map
-          zoom={14}
-          center={position}
-          mapId={GOOGLE_MAPS_ID}
-          fullscreenControl={true}
-          gestureHandling="greedy" 
-        >
+      <Map
+        defaultCenter={position}
+        defaultZoom={14}
+        mapId={GOOGLE_MAPS_ID}
+
+        /* allow pan/zoom gestures */
+        gestureHandling="greedy"
+
+        /* show built-in controls */
+        zoomControl={true}
+        fullscreenControl={true}
+      >
+
         <AdvancedMarker position={position} onClick={() => setOpen(true)}>
           <Pin background="#43a047" borderColor="#388e3c" glyphColor="#ffffff" />
         </AdvancedMarker>
@@ -130,7 +136,11 @@ const MapPage = () => {
           onClick={handleDestinationSubmit}
           disabled={isLoading}
         >
-          {isLoading ? 'Searching...' : 'Go'}
+          {isLoading ? (
+            <div className="loading-spinner">🔄</div>
+          ) : (
+            'Go'
+          )}
         </button>
       </div>
   
