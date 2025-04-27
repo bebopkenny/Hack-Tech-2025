@@ -99,17 +99,17 @@ const MapPage = () => {
     <div className="map-container">
       <div ref={placesDivRef} style={{ display: 'none' }} />
  
-            <Map
-            zoom={14}
-            center={position}
-            mapId={GOOGLE_MAPS_ID}
-            fullscreenControl={true}
-            gestureHandling="greedy" 
-          >
+        <Map
+          zoom={14}
+          center={position}
+          mapId={GOOGLE_MAPS_ID}
+          fullscreenControl={true}
+          gestureHandling="greedy" 
+        >
         <AdvancedMarker position={position} onClick={() => setOpen(true)}>
-          <Pin background="grey" borderColor="green" glyphColor="purple" />
+          <Pin background="#43a047" borderColor="#388e3c" glyphColor="#ffffff" />
         </AdvancedMarker>
-  
+
         {open && (
           <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
             <p>Hi {userName || 'Traveler'}!</p>

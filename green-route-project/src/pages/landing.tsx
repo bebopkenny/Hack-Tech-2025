@@ -21,7 +21,7 @@ const LandingPage = () => {
 
   return (
     <div className="landing-container">
-      <h1 className="landing-title">Welcome to GreenRoute 🌿</h1>
+      <h1 className="landing-title">Welcome to GreenRoute</h1>
 
       <form onSubmit={handleDestinationSubmit} className="destination-form">
         <label htmlFor="destination" className="destination-label">Enter Your Destination:</label>

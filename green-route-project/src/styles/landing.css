@@ -11,45 +11,45 @@ body {
     align-items: center;
     padding: 2rem;
     max-width: 700px;
-    margin: 0 auto;
+    margin: auto;
     animation: fadeIn 0.8s ease-in-out;
   }
   
   .landing-title {
-    font-size: 2.75rem;
-    font-weight: 700;
+    font-size: 3rem;
     color: #2e7d32;
     margin-bottom: 1.5rem;
   }
   
-  .destination-form {
-    background: #ffffff;
+  .destination-form, .green-spots, .eco-tip {
+    background: white;
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
     width: 100%;
-    margin-bottom: 2rem;
   }
   
   .destination-input {
     width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 12px;
     border: 1px solid #ccc;
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
   }
   
   .destination-button {
+    width: 100%;
     margin-top: 1rem;
-    padding: 0.75rem 2rem;
-    font-size: 1.2rem;
+    padding: 0.75rem;
     background-color: #4caf50;
     color: white;
-    border: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
   }
   
   .destination-button:hover {
@@ -57,55 +57,32 @@ body {
     transform: scale(1.02);
   }
   
-  .green-spots, .eco-tip, .coming-soon {
-    background: #ffffff;
-    padding: 1.5rem;
-    border-radius: 16px;
-    margin-top: 2rem;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.08);
-    width: 100%;
-    text-align: left;
-  }
-  
-  .green-spots h2, .eco-tip h2, .coming-soon h2 {
-    color: #2e7d32;
-    font-weight: 600;
-  }
-  
   ul {
-    padding: 0;
     list-style: none;
-    margin-top: 1rem;
+    padding: 0;
   }
   
   li {
     margin: 0.5rem 0;
-    font-size: 1.1rem;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.3s;
   }
   
   li:hover {
-    color: #388e3c; 
+    color: #2e7d32;
   }
   
   @keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
   
-  .chart-container {
-    margin-top: 2rem;
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  .chart-section {
     width: 100%;
-    max-width: 700px;
+    margin-top: 1rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-
-  .destination-button:hover {
-    background-color: #388e3c;
-  }
-  
   

@@ -1,131 +1,114 @@
 .map-container {
-    height: 100vh;
-    width: 100%;
-}
-
-.destination-container {
-    width: 90%;
-    padding: 1rem;
-    margin: 1rem auto;
-    border-radius: 12px;
-    font-size: 1.2rem;
+  height: 100vh;
+  width: 100%;
+  position: relative;
 }
 
 .where-to-container {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    z-index: 10;
+  position: absolute;
+  top: 20px;
+  left: 47%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  width: 350px;
 }
+
+.destination-container {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.destination-container:focus {
+  border-color: #43a047;
+  box-shadow: 0 0 0 3px rgba(67,160,71,0.2);
+}
+
 
 .destination-button {
-    padding: 0.5rem 1rem;
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  margin-top: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-weight: 600;
 }
 
-.directions {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+.destination-button:hover {
+  background-color: #43a047;
+  transform: scale(1.05);
 }
 
-.distance-duration-container {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    text-align: center;
+.sidebar-panel {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  width: 400px;
+  background-color: rgba(255,255,255,0.95);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 10;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
 }
 
-.route-info {
-    margin-top: 1rem;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-  }
-  .route-info h3, .route-info h4 {
-    margin: 0.5rem 0;
-  }
-  
 
-  .eco-options {
-    margin-top: 1.5rem;
-  }
-  
-  .eco-option-card {
-    margin-top: 0.75rem;
-    padding: 1rem;
-    background: #e6f5ea;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    text-align: left;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-  }
-  
-  .destination-button:hover {
-    background-color: #388e3c;
-  }
-  
-  .charts-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-  
-  .chart-card {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    flex: 1 1 300px;
-    max-width: 500px;
-  }
-  
-  .chart-title {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #2e7d32;
-  }
-  
-  .sidebar-panel {
-    position: absolute;
-    top: 120px;
-    right: 20px;
-    width: 350px;
-    background: #ffffff;
-    padding: 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    z-index: 10;
-  }
-  
+.eco-middle-card {
+  margin-bottom: 1rem;
+}
 
-  @media (max-width: 900px) {
-    .sidebar-panel {
-      position: static;
-      width: 100%;
-      margin-top: 2rem;
-      box-shadow: none;
-    }
-  }
-  
-  
+.eco-option-card {
+  background-color: #e8f5e9;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin-top: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.eco-option-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.charts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chart-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #43a047;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #388e3c;
+}
