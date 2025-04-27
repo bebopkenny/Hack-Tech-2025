@@ -15,7 +15,7 @@ const MapPage = () => {
 
   const placesDivRef = useRef<HTMLDivElement>(null);
 
-    const map = useMap();
+  const map = useMap();
   const directionsRendererRef = useRef<google.maps.DirectionsRenderer | null>(null);
 
   const position = startLocation || { lat: 33.921, lng: -118.053 };
